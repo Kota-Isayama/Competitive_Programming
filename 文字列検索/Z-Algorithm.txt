@@ -1,0 +1,45 @@
+vector<int> Z_Algorithm(string s) {
+    int l = s.length();
+    vector<int> z(l, 0);
+    z[0] = l;
+    int i = 1, j = 0;
+    while (i < l) {
+        while (i+j < l && s[j] == s[i+j])
+            j++;
+        z[i] = j;
+        if (j == 0) {
+            i++;
+            continue;
+        }
+        int k = 1;
+        while (i+k < l && k+z[k] < j) {
+            z[i+k] = z[k];
+            k++;
+        }
+        i += k;
+        j -= k;
+    }
+    return z;
+}
+
+//文字列でない配列用
+vector<int> Z_Algorithm(vector<ll> &s) {
+    int l = s.size();
+    vector<int> z(l, 0);
+    z[0] = l;
+    int i = 1, j = 0;
+    while (i < l) {
+        while (i+j < l && s[j] == s[i+j])   j++;
+        z[i] = j;
+        if (j == 0) {
+            i++;
+            continue;
+        }
+        int k = 1;
+        while (i+k < l && k+z[k] < j) {
+            z[i+k] = z[k], k++;
+        }
+        i += k, j -= k;
+    }
+    return z;
+}
